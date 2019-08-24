@@ -15,17 +15,31 @@ export default new Vuex.Store({
             {
                 id: 2,
                 title: "todo item 2",
-                completed: false
+                completed: true
             },
             {
                 id: 3,
                 title: "todo item 3",
-                completed: false
+                completed: true
             }
         ]
     },
     getters: {
-
+        count: state => ++state.count,
+        // count(state) {
+        //     return ++state.count
+        // }
+        completedTodos: state => state.todos.filter(todo => todo.completed),
+        // completedTodos: function (state) {
+        //     return state.todos.filter(function (todo) {
+        //         return todo.completed
+        //     })
+        // }
+        // completedTodosCount:(state,getters) => getters.completedTodos.length
+        completedTodosCount: function(state, getters) {
+            return getters.completedTodos.length;
+        },
+        getTodosById: state => id => state.todos.find(todo => todo.id == id)
     },
     mutations: {
 
