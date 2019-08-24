@@ -1,17 +1,15 @@
 <template>
   <div id="app">
-    <p>App.vue:{{count}}</p>
-    <!-- <p>App.vue:{{todos}}</p> -->
-    <!-- <Count /> -->
-    <p>{{completedTodos}}</p>
-    <p>{{completedTodosCount}}</p>
-    <p>{{getTodosById(2)}}</p>
+    <!-- mutation -->
+    <button @click="decrementCount({amount:2})">-</button>
+    <span>{{count}}</span>
+    <button @click="incrementCount">+</button>
   </div>
 </template>
 
 <script>
 import Count from "./components/Count";
-import { mapState, mapGetters } from "vuex";
+import { mapState, mapGetters, mapMutations } from "vuex";
 export default {
   name: "app",
   components: {
@@ -22,21 +20,18 @@ export default {
     "completedTodos",
     "completedTodosCount",
     "getTodosById"
-  ])
-  // computed: {
-  //   count() {
-  //     return this.$store.getters.getCount;
+  ]),
+  // methods: {
+  //   increment() {
+  //     // 调用mutations里的incrementCount
+  //     this.$store.commit("incrementCount");
   //   },
-  //   completedTodos() {
-  //     return this.$store.getters.completedTodos;
-  //   },
-  //   completedTodosCount() {
-  //     return this.$store.getters.completedTodosCount;
-  //   },
-  //   getTodosById() {
-  //     return this.$store.getters.getTodosById;
+  //   decrement(n) {
+  //     // 调用mutation里的decrementCount
+  //     this.$store.commit("decrementCount", n);
   //   }
   // }
+  methods: mapMutations(["incrementCount", "decrementCount"])
 };
 </script>
 
